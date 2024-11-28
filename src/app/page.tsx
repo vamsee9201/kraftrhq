@@ -1,27 +1,40 @@
 "use client";
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-export default function MyApp() {
-  const [count, setCount] = useState(0);
+const Page = () => {
+  const [number1, setNumber1] = useState('');
+  const [number2, setNumber2] = useState('');
 
-  function handleClick() {
-    setCount(count + 1);
-  }
+  const handleSubmit = () => {
+    console.log('Number 1:', number1);
+    console.log('Number 2:', number2);
+  };
 
   return (
     <div>
-      <h1>Counters that update together</h1>
-      <MyButton count={count} onClick={handleClick} />
-      <MyButton count={count} onClick={handleClick} />
+      <h1>Enter Two Numbers</h1>
+      <div>
+        <label htmlFor="number1">Number 1:</label>
+        <input
+          type="number"
+          id="number1"
+          value={number1}
+          onChange={(e) => setNumber1(e.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="number2">Number 2:</label>
+        <input
+          type="number"
+          id="number2"
+          value={number2}
+          onChange={(e) => setNumber2(e.target.value)}
+        />
+      </div>
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
-}
+};
 
-function MyButton({ count, onClick }) {
-  return (
-    <button onClick={onClick}>
-      Clicked {count} times
-    </button>
-  );
-}
+export default Page;
