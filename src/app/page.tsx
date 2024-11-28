@@ -1,35 +1,39 @@
 "use client";
 
 import React, { useState } from 'react';
+import {useRouter} from "next/navigation";
 
 const Page = () => {
-  const [number1, setNumber1] = useState('');
-  const [number2, setNumber2] = useState('');
+  const [timeframe, setTimeframe] = useState("day");
+  const [calorieGoal, setCalorieGoal] = useState("");
+  const router = useRouter();
 
   const handleSubmit = () => {
-    console.log('Number 1:', number1);
-    console.log('Number 2:', number2);
+    // Redirect to the new page with query parameters
+    router.push(`/recipes?timeframe=${timeframe}&calorieGoal=${calorieGoal}`);
   };
-
   return (
     <div>
-      <h1>Enter Two Numbers</h1>
+      <h1>Generate recipes</h1>
       <div>
-        <label htmlFor="number1">Number 1:</label>
-        <input
-          type="number"
-          id="number1"
-          value={number1}
-          onChange={(e) => setNumber1(e.target.value)}
-        />
+        <label htmlFor="timeframe">Time Frame:</label>
+        <select
+          id="timeframe"
+          value={timeframe}
+          onChange={(e) => setTimeframe(e.target.value)}
+        >
+          <option value="day">Day</option>
+          <option value="week">Week</option>
+          <option value="month">Month</option>
+        </select>
       </div>
       <div>
-        <label htmlFor="number2">Number 2:</label>
+        <label htmlFor="calorie_goal">Calorie Goal:</label>
         <input
           type="number"
-          id="number2"
-          value={number2}
-          onChange={(e) => setNumber2(e.target.value)}
+          id="calorie_goal"
+          value={calorieGoal}
+          onChange={(e) => setCalorieGoal(e.target.value)}
         />
       </div>
       <button onClick={handleSubmit}>Submit</button>
