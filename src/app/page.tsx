@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import axios from "axios";
 import {useRouter} from "next/navigation";
 
 const Page = () => {
@@ -8,9 +9,21 @@ const Page = () => {
   const [calorieGoal, setCalorieGoal] = useState("");
   const router = useRouter();
 
-  const handleSubmit = () => {
-    // Redirect to the new page with query parameters
-    router.push(`/recipes?timeframe=${timeframe}&calorieGoal=${calorieGoal}`);
+  const handleSubmit = async () => {
+    try {
+      // Send a POST request to the Flask server
+      const response = await axios.post("http://127.0.0.1:5000/generate", {
+        timeframe,
+        calorieGoal,
+      });
+
+      // Pass the data as query parameters to the recipes page
+      const { recipes } = response.data;
+      const query = JSON.stringify(recipes); // Convert recipes to a string
+      router.push(`/recipes?recipes=${encodeURIComponent(query)}`);
+    } catch (error) {
+      console.error("Error generating recipes:", error);
+    }
   };
   return (
     <div>
