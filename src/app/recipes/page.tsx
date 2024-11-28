@@ -2,6 +2,8 @@
 
 import React from "react";
 import { useSearchParams } from "next/navigation";
+import { marked } from "marked";
+
 
 const RecipesPage = () => {
   const searchParams = useSearchParams();
@@ -10,6 +12,8 @@ const RecipesPage = () => {
   const timeframe = searchParams.get("timeframe");
   const calorieGoal = searchParams.get("calorieGoal");
   const recipe = searchParams.get("recipe");
+
+  const recipeHtml = recipe ? marked(recipe) : "";
 
   return (
     <div>
@@ -21,7 +25,8 @@ const RecipesPage = () => {
         <strong>Calorie Goal:</strong> {calorieGoal}
       </p>
       <p>
-        <strong>Recipe Status:</strong> {recipe}
+        <strong>Recipe Status:</strong> 
+        <div dangerouslySetInnerHTML={{ __html: recipeHtml }} />
       </p>
     </div>
   );
