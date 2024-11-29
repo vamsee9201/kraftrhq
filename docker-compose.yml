@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  flask-backend:
+    build:
+      context: ./kraftrhq-backend
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./kraftrhq-backend:/app
+    environment:
+      - FLASK_ENV=development
+
+  react-frontend:
+    build:
+      context: ./kraftr-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./kraftr-frontend:/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true

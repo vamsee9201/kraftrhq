@@ -3,9 +3,10 @@
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import { marked } from "marked";
+import { Suspense } from 'react';
 
 
-const RecipesPage = () => {
+const RecipeContent = () => {
   const searchParams = useSearchParams();
 
   // Retrieve query parameters
@@ -31,5 +32,16 @@ const RecipesPage = () => {
     </div>
   );
 };
+
+
+const RecipesPage = () => {
+
+  return (
+    // You could have a loading skeleton as the `fallback` too
+    <Suspense>
+      <RecipeContent/>
+    </Suspense>
+  )
+}
 
 export default RecipesPage;
