@@ -12,9 +12,11 @@ const Page = () => {
 
   const handleSubmit = async () => {
     setLoading(true); // Start loading
+    const API_URL = "http://127.0.0.1:5000"
+    // const API_URL = "http://flask-backend:5000"; // Inside Docker Compose
     try {
       // Make a POST request to the Flask server
-      const response = await axios.post("http://127.0.0.1:5000/generate", {
+      const response = await axios.post(`${API_URL}/generate`, {
         timeframe,
         calorieGoal,
       });
