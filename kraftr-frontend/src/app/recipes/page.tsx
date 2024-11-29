@@ -24,10 +24,10 @@ const RecipesPage = () => {
       <p>
         <strong>Calorie Goal:</strong> {calorieGoal}
       </p>
-      <p>
+      <div>
         <strong>Recipe Status:</strong> 
         <div dangerouslySetInnerHTML={{ __html: recipeHtml }} />
-      </p>
+      </div>
     </div>
   );
 };
