@@ -41,7 +41,7 @@ const RecipesPage = () => {
     <Suspense>
       <RecipeContent/>
     </Suspense>
-  )
-}
+  );
+};
 
 export default RecipesPage;
